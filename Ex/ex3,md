@@ -1,0 +1,37 @@
+tem postado: 26 de ago. (editado: 26 de ago.)
+Pendente
+Exercício 1: Validação de Entrada (Básico)
+
+Objetivo: Praticar o uso de try-catch para lidar com erros de conversão de tipo.
+Crie uma função chamada lerIdade().
+Dentro da função, use readLine() para pedir ao usuário que digite a sua idade.
+Use um bloco try-catch para converter a entrada para um Int.
+Se a conversão falhar (por exemplo, se o usuário digitar "vinte" em vez de 20), capture a exceção NumberFormatException e imprima uma mensagem de erro clara.
+Se a conversão for bem-sucedida, imprima a idade do usuário.
+Exercício 2: Cálculo de Média (Intermediário)
+Objetivo: Lidar com múltiplas exceções e a divisão por zero.
+Crie uma função calcularMedia(notas: List<Int>).
+A função deve calcular a média das notas na lista.
+Use um bloco try-catch para lidar com duas situações:Lista vazia: Se a lista de notas estiver vazia, a divisão por zero pode ocorrer. Use uma verificação if e lance manualmente uma exceção do tipo IllegalArgumentException com a mensagem "A lista de notas não pode estar vazia.".
+Notas inválidas: Adicione um catch para ArithmeticException para lidar com o caso de divisão por zero, caso você não tenha uma verificação prévia.
+Em seu programa principal (main), teste a função com:Uma lista de notas válida: listOf(8, 7, 9, 6)
+Uma lista vazia: listOf()
+Exercício 3: Senha Inválida (Exceção Personalizada)
+Objetivo: Criar e lançar uma exceção personalizada para uma regra de negócio.
+Crie uma exceção personalizada chamada SenhaInvalidaException que herde de IllegalArgumentException. A exceção deve aceitar uma String de mensagem no construtor.
+Crie uma função validarSenha(senha: String).
+Dentro da função, implemente as seguintes regras de validação:A senha deve ter pelo menos 8 caracteres.
+A senha deve conter pelo menos um número.
+Se a senha não atender a qualquer uma das regras, lance a sua exceção personalizada com uma mensagem que descreva o erro.
+Em seu main, use um bloco try-catch para chamar validarSenha() com senhas que falham nas regras e imprima a mensagem de erro.
+Exercício 4: Leitura de Arquivo com runCatching (Avançado)
+Objetivo: Utilizar runCatching para um tratamento de erro mais conciso e funcional.
+Assuma que você tem um arquivo de texto dados.txt com o seguinte conteúdo:
+nome:João
+idade:30
+cidade:São Paulo
+Crie uma função lerDadosDoArquivo(caminho: String): Map<String, String>?.
+Dentro da função, use runCatching para ler as linhas do arquivo e transformá-las em um Map<String, String>.Dentro do bloco runCatching, use File(caminho).readLines() para ler o arquivo.
+Mapeie cada linha para um par chave-valor (por exemplo, "nome" para "João").
+Use getOrNull() para retornar null se qualquer exceção ocorrer durante a leitura do arquivo ou a conversão dos dados (por exemplo, FileNotFoundException).
+Em seu main, chame a função com um caminho de arquivo válido e outro inválido e imprima o resultado.
