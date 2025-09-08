@@ -1,4 +1,4 @@
-# 🎯 PDM-Kotlin - Sistema Educacional Completo
+# 🎯 PDM-Kotlin - Repositorio de Conhecimento Colaborativo - Kotlin.
 
 <div align="center">
 
