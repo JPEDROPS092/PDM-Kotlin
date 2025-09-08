@@ -549,19 +549,20 @@ gantt
     title Roadmap PDM-Kotlin
     dateFormat  YYYY-MM-DD
     section Fundação ✅
-    Setup inicial           :done, setup, 2024-01-01, 2024-01-15
-    Exercícios básicos      :done, exerc, 2024-01-15, 2024-02-01
-    Sistema SPW            :done, spw, 2024-02-01, 2024-02-28
+    Setup inicial           :done, setup, 2025-08-01, 2025-08-05
+    Exercícios básicos      :done, exerc, 2025-08-06, 2025-08-10
+    Sistema SPW             :done, spw, 2025-08-11, 2025-08-15
     
     section Melhorias 🚧
-    Testes unitários       :active, tests, 2024-03-01, 2024-03-15
-    CI/CD Pipeline         :cd, 2024-03-10, 2024-03-20
-    Documentação avançada  :docs, 2024-03-15, 2024-03-30
+    Testes unitários        :active, tests, 2025-08-16, 2025-08-20
+    CI/CD Pipeline          :cd, 2025-08-21, 2025-08-25
+    Documentação avançada   :docs, 2025-08-26, 2025-08-30
     
     section Futuro 📋
-    Mobile App             :mobile, 2024-04-01, 2024-05-01
-    Web Interface          :web, 2024-05-01, 2024-06-01
-    API REST               :api, 2024-06-01, 2024-07-01
+    Mobile App              :mobile, 2025-08-31, 2025-09-05
+    Web Interface           :web, 2025-09-06, 2025-09-10
+    API REST                :api, 2025-09-11, 2025-09-15
+
 ```
 
 </div>
