@@ -276,7 +276,7 @@ sequenceDiagram
 - **Companion Objects**: Métodos estáticos
 - **Sealed Classes**: Hierarquias fechadas
 
-## 🚀 Quick Start
+## 🚀 Quick Starthttps://github.com/JPEDROPS092/PDM-Kotlin/
 
 ### 📋 Pré-requisitos
 
@@ -485,7 +485,7 @@ graph LR
 ```bash
 # 1. Fork o repositório
 # 2. Clone seu fork
-git clone https://github.com/seu-usuario/PDM-Kotlin.git
+git clone https://github.com/jpedops092/PDM-Kotlin.git
 
 # 3. Crie uma branch para sua funcionalidade
 git checkout -b feature/nova-funcionalidade
