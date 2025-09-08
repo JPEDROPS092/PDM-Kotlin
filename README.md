@@ -289,7 +289,7 @@ sequenceDiagram
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/PDM-Kotlin.git
+git clone https://github.com/jpedrops092/PDM-Kotlin.git
 cd PDM-Kotlin
 
 # 2. Execute o menu interativo
