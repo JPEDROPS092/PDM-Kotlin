@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 class Data(private var dia: Int, private var mes: Int, private var ano: Int) {
     
-    fun toString(): String = String.format("%02d/%02d/%04d", dia, mes, ano)
+    override fun toString(): String = String.format("%02d/%02d/%04d", dia, mes, ano)
     
     fun setData(dia: Int, mes: Int, ano: Int) {
         this.dia = dia

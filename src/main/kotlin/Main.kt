@@ -1,4 +1,3 @@
-import exercicios.*
 import questoes.*
 
 fun main() {
@@ -25,23 +24,23 @@ fun main() {
         
         when (opcao) {
             "1" -> {
-                println("🔧 Executando Exercícios Básicos de Sintaxe...")
-                SintaxeBasica.main(arrayOf())
+                println("🔧 Para executar exercícios básicos de sintaxe:")
+                println("./gradlew run --main-class=exercicios.SintaxeBasicaKt")
             }
             
             "2" -> {
-                println("📊 Executando Exercícios Complementares...")
-                ExerciciosComplementares.main(arrayOf())
+                println("📊 Para executar exercícios complementares:")
+                println("./gradlew run --main-class=exercicios.ExerciciosComplementaresKt")
             }
             
             "3" -> {
-                println("📁 Executando Exercícios de Manipulação de Arquivos...")
-                ManipulacaoArquivos.main(arrayOf())
+                println("📁 Para executar exercícios de manipulação de arquivos:")
+                println("./gradlew run --main-class=exercicios.ManipulacaoArquivosKt")
             }
             
             "4" -> {
-                println("⚠️ Executando Exercícios de Tratamento de Exceções...")
-                TratamentoExcecoes.main(arrayOf())
+                println("⚠️ Para executar exercícios de tratamento de exceções:")
+                println("./gradlew run --main-class=exercicios.TratamentoExcecoesKt")
             }
             
             "5" -> {
