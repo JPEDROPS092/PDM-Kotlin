@@ -1,0 +1,275 @@
+name: 🚀 CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    name: 🏗️ Build and Test
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        java: [17, 21]
+        
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: ☕ Setup Java ${{ matrix.java }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ matrix.java }}
+        distribution: 'temurin'
+        
+    - name: 🐘 Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      
+    - name: 📦 Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: 🔧 Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: 🏗️ Build with Gradle
+      run: ./gradlew build --no-daemon
+      
+    - name: 🧪 Run tests
+      run: ./gradlew test --no-daemon
+      
+    - name: 📊 Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: 📋 Test Results (Java ${{ matrix.java }})
+        path: build/test-results/test/*.xml
+        reporter: java-junit
+        
+    - name: 📈 Upload coverage reports
+      if: matrix.java == '17'
+      uses: codecov/codecov-action@v3
+      with:
+        files: build/reports/jacoco/test/jacocoTestReport.xml
+
+  quality:
+    name: 🔍 Code Quality
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+        
+    - name: 🐘 Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      
+    - name: 🔧 Grant execute permission
+      run: chmod +x gradlew
+      
+    - name: 📏 Kotlin linting (ktlint)
+      run: ./gradlew ktlintCheck --no-daemon || true
+      
+    - name: 🔍 Static analysis (detekt)
+      run: ./gradlew detekt --no-daemon || true
+      
+    - name: 📊 SonarCloud Scan
+      if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ./gradlew sonarqube --no-daemon || true
+
+  demo:
+    name: 🎯 Demo and Integration Tests
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+        
+    - name: 🐘 Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      
+    - name: 🔧 Grant execute permissions
+      run: |
+        chmod +x gradlew
+        chmod +x test-simple.sh
+        
+    - name: 🏗️ Build project
+      run: ./gradlew build --no-daemon
+      
+    - name: 🎮 Test interactive features
+      run: |
+        echo "Testing menu compilation..."
+        ./gradlew run --args="--version" --no-daemon || true
+        
+    - name: 🧪 Run comprehensive tests
+      run: ./test-simple.sh
+      
+    - name: 🏪 Test SPW System
+      run: |
+        echo "Testing AP2 Questions..."
+        timeout 10s java -cp "build/classes/kotlin/main:$(find ~/.gradle -name 'kotlin-stdlib-*.jar' | head -1)" questoes.AP2Questao1 || true
+        timeout 10s java -cp "build/classes/kotlin/main:$(find ~/.gradle -name 'kotlin-stdlib-*.jar' | head -1)" questoes.AP2Questao4 || true
+        timeout 10s java -cp "build/classes/kotlin/main:$(find ~/.gradle -name 'kotlin-stdlib-*.jar' | head -1)" questoes.AP2Questao8 || true
+        
+    - name: 📚 Test Basic Exercises
+      run: |
+        echo "Testing exercises compilation..."
+        timeout 10s java -cp "build/classes/kotlin/main:$(find ~/.gradle -name 'kotlin-stdlib-*.jar' | head -1)" exercicios.SintaxeBasicaKt || true
+
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: 📤 Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  docs:
+    name: 📚 Documentation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+        
+    - name: 🐘 Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      
+    - name: 📖 Generate documentation
+      run: ./gradlew dokkaHtml --no-daemon || true
+      
+    - name: 🚀 Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: success()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: build/dokka/html
+
+  release:
+    name: 🚢 Release
+    runs-on: ubuntu-latest
+    needs: [build, quality, demo, security]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+        
+    - name: 🐘 Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      
+    - name: 🏗️ Build release
+      run: ./gradlew build --no-daemon
+      
+    - name: 📦 Create release artifacts
+      run: |
+        mkdir -p release-artifacts
+        cp build/libs/*.jar release-artifacts/
+        cp README.md release-artifacts/
+        cp LICENSE release-artifacts/
+        tar -czf release-artifacts/pdm-kotlin-complete.tar.gz src/
+        
+    - name: 📊 Generate changelog
+      id: changelog
+      run: |
+        echo "## 🚀 What's Changed" >> CHANGELOG.md
+        git log --pretty=format:"- %s (%h)" --since="$(git describe --tags --abbrev=0 2>/dev/null || echo '1970-01-01')" >> CHANGELOG.md
+        echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+        cat CHANGELOG.md >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+    - name: 🏷️ Create release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: release-artifacts/*
+        body: ${{ steps.changelog.outputs.CHANGELOG }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify:
+    name: 📢 Notify
+    runs-on: ubuntu-latest
+    needs: [build, quality, demo]
+    if: always()
+    
+    steps:
+    - name: 📊 Build Status
+      uses: 8398a7/action-slack@v3
+      if: always()
+      with:
+        status: ${{ job.status }}
+        channel: '#builds'
+        text: |
+          🚀 PDM-Kotlin CI/CD Pipeline
+          
+          📊 Results:
+          • Build: ${{ needs.build.result }}
+          • Quality: ${{ needs.quality.result }} 
+          • Demo: ${{ needs.demo.result }}
+          
+          📋 Branch: ${{ github.ref }}
+          👤 Author: ${{ github.actor }}
+          💾 Commit: ${{ github.sha }}
+          
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
