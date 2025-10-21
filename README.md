@@ -50,19 +50,31 @@ graph TD
 
 ### 📚 Exercícios Básicos
 
-#### 1. Sintaxe Básica (`SintaxeBasica.kt`)
+#### 1. Sintaxe Básica (`SintaxeBasica.kt`) - Exercício de Fixação - Kotlin (sintaxe básica)
+Emmerson Santa Rita da Silva
+•
+13 de ago. (editado: 26 de ago.)
 - ✅ Variáveis mutáveis e imutáveis
 - ✅ Funções de expressão única
 - ✅ Extensions functions
 - ✅ Null safety (safe calls, elvis operator)
 - ✅ Data classes e classes com métodos
 
-#### 2. Exercícios Complementares (`ExerciciosComplementares.kt`)
+
+#### 2. Exercícios Complementares - Exercício de Fixação - Kotlin (sintaxe básica) - 
+
+Emmerson Santa Rita da Silva
+•
+13 de ago. (editado: 26 de ago.)(`ExerciciosComplementares.kt`)
 - ✅ Sistema de comissão de vendedores
 - ✅ Levantamento estatístico de candidatos  
 - ✅ Sistema de avaliação acadêmica
 
-#### 3. Manipulação de Arquivos (`ManipulacaoArquivos.kt`)
+#### 3. Manipulação de Arquivos - Exercício de fixação - Kotlin (Arquivos)
+Emmerson Santa Rita da Silva
+•
+26 de ago. (editado: 27 de ago.)
+(`ManipulacaoArquivos.kt`)
 - ✅ Leitura/escrita de arquivos texto
 - ✅ Serialização JSON com `@Serializable`
 - ✅ Manipulação de arquivos binários
@@ -71,7 +83,12 @@ graph TD
 - ✅ Contador de frequência de palavras
 - ✅ Sistema de backup automático
 
-#### 4. Tratamento de Exceções (`TratamentoExcecoes.kt`)
+#### 4. Tratamento de Exceções - Exercícios de fixação kotlin (exceções)
+Emmerson Santa Rita da Silva
+•
+26 de ago. (editado: 27 de ago.)
+
+(`TratamentoExcecoes.kt`)
 - ✅ Try-catch com múltiplas exceções
 - ✅ Exceções personalizadas
 - ✅ `runCatching` para programação funcional
@@ -294,6 +311,9 @@ sequenceDiagram
 
 git clone https://github.com/jpedrops092/PDM-Kotlin.git
 cd PDM-Kotlin
+2
+
+1
 
 # 2. Execute o menu interativo
 ./gradlew run
