@@ -314,9 +314,6 @@ sequenceDiagram
 
 git clone https://github.com/jpedrops092/PDM-Kotlin.git
 cd PDM-Kotlin
-2
-
-1
 
 # 2. Execute o menu interativo
 ./gradlew run
