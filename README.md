@@ -13,6 +13,9 @@
 
 </div>
 
+![Logo do IFAM](https://upload.wikimedia.org/wikipedia/commons/6/6f/Instituto_Federal_do_Amazonas_-_Marca_Vertical_2015.svg)
+
+
 ## 📋 Visão Geral
 
 Este projeto educacional foi desenvolvido para a disciplina de **Programação para Dispositivos Móveis (PDM)** e serve como:
@@ -470,7 +473,8 @@ plugins {
 
 **Implementação Original e Autêntica**  
 Projeto desenvolvido para a disciplina PDM  
-Data: 2024  
+Joao Pedro Pereira Santiago
+Data: 2025  
 
 ---
 
@@ -599,9 +603,8 @@ Agradecemos a todos que contribuíram para este projeto:
 
 ### 🎓 Inspiração Educacional
 
-- **Professores** que incentivam o aprendizado prático
+- **Professores** Emmerson Santa Rita
 - **Comunidade Kotlin** por recursos e documentação excelentes  
-- **Estudantes** que fazem perguntas que nos ajudam a melhorar
 
 ### 🛠️ Tecnologias
 
@@ -622,12 +625,6 @@ Agradecemos às tecnologias que tornam este projeto possível:
 - 📚 **Wiki**: Para documentação detalhada
 - 📧 **Email**: Para questões privadas
 
-### 🌍 Comunidade
-
-- 📱 **Discord**: [Link para servidor]
-- 🐦 **Twitter**: [@PDMKotlin]
-- 📧 **Newsletter**: Atualizações mensais
-- 📺 **YouTube**: Tutoriais e live coding
 
 ### 🆘 Problemas Comuns
 
@@ -686,18 +683,18 @@ Este projeto é especialmente otimizado para:
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=seu-usuario/PDM-Kotlin&type=Date)](https://star-history.com/#seu-usuario/PDM-Kotlin&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=jpedrops092/PDM-Kotlin&type=Date)](https://star-history.com/#seu-usuario/PDM-Kotlin&Date)
 
 ---
 
 <div align="center">
 
-**🎯 Made with ❤️ for the Kotlin learning community**
+**Feito por Joao Pedro Pereira Santiago**
 
 [![Made with Kotlin](https://img.shields.io/badge/Made%20with-Kotlin-7F52FF.svg)](https://kotlinlang.org/)
 [![Built with Gradle](https://img.shields.io/badge/Built%20with-Gradle-02303A.svg)](https://gradle.org/)
 [![Powered by Education](https://img.shields.io/badge/Powered%20by-Education-brightgreen.svg)](README.md)
 
-**[⭐ Dê uma estrela](https://github.com/seu-usuario/PDM-Kotlin) se este projeto te ajudou!**
+**[⭐ Dê uma estrela](https://github.com/jpedrops092/PDM-Kotlin) se este projeto te ajudou!**
 
 </div>
